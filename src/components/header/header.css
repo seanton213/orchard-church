@@ -40,9 +40,27 @@
   border-radius: var(--border-radius);
   z-index: 1000;
 }
+.dropdown.open .dropdown-menu {
+  display: block;
+}
 
+.dropdown-link {
+  cursor: pointer;
+  color: var(--color-brown);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.dropdown-link:hover {
+  color: var(--color-red); /* Change on hover */
+}
 .dropdown:hover .dropdown-menu {
   display: block;
+}
+
+.dropdown.open > .dropdown-link.active {
+  color: var(--color-brown); /* Or another color to remove highlight */
+  border-bottom: none; /* Remove underline */
 }
 
 .dropdown-menu a {
@@ -73,7 +91,7 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  padding-right: 1rem; 
+  padding-right: 1rem;
   z-index: 999;
 }
 

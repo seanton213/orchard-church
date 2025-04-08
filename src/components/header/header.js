@@ -72,29 +72,29 @@ const Header = ({ siteTitle }) => {
               </Link>
             </li>
             <li className="dropdown">
-              <Link to="/about" activeClassName="active" partiallyActive={true}>
+              <Link to="/about" partiallyActive="active">
                 Who We Are
               </Link>
               <ul className="dropdown-menu">
                 <li>
-                  <Link to="/about/history" activeClassName="active">
+                  <Link to="/about/history" partiallyActive="active">
                     Our History
                   </Link>
                 </li>
                 <li>
-                  <Link to="/about/beliefs" activeClassName="active">
+                  <Link to="/about/beliefs" partiallyActive="active">
                     Beliefs
                   </Link>
                 </li>
                 <li>
-                  <Link to="/about/leadership" activeClassName="active">
+                  <Link to="/about/leadership" partiallyActive="active">
                     Leadership
                   </Link>
                 </li>
               </ul>
             </li>
             <li>
-              <Link to="/ministries" activeClassName="active">
+              <Link to="/ministry" activeClassName="active">
                 Our Ministries
               </Link>
             </li>
