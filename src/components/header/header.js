@@ -73,17 +73,17 @@ const Header = ({ siteTitle }) => {
             </li>
             <li className="dropdown">
               <Link to="/about" partiallyActive="active">
-                Who We Are
+                About Us
               </Link>
               <ul className="dropdown-menu">
                 <li>
                   <Link to="/about/history" partiallyActive="active">
-                    Our History
+                    Who We Are
                   </Link>
                 </li>
                 <li>
                   <Link to="/about/beliefs" partiallyActive="active">
-                    Beliefs
+                    What We Believe
                   </Link>
                 </li>
                 <li>

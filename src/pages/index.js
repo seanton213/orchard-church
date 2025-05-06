@@ -3,6 +3,7 @@ import Layout from "../components/layout";
 import Seo from "../components/seo";
 import { StaticImage } from "gatsby-plugin-image";
 import styled from "styled-components";
+import { useState } from "react";
 
 const HeroWrapper = styled.section`
   position: relative;
@@ -57,6 +58,7 @@ const SubText = styled.p`
 `;
 
 const IndexPage = () => {
+  const [loaded, setLoaded] = useState(false);
   return (
     <Layout>
       <HeroWrapper>
@@ -67,24 +69,27 @@ const IndexPage = () => {
             layout="fullWidth"
             placeholder="blurred"
             style={{ height: "100%", width: "100%" }}
+            onLoad={() => setLoaded(true)}
           />
         </BackgroundImage>
 
-        <OverlayContent>
-          <LogoWrapper>
-            <StaticImage
-              src="../images/logo_circle.png"
-              alt="Orchard Church Logo"
-              placeholder="blurred"
-            />
-          </LogoWrapper>
-
-          <HeroText>Sunday Morning Worship</HeroText>
-          <SubText>9:00 AM — 1054 Broadway St, Chico</SubText>
-
-          <HeroText>Church On the Street</HeroText>
-          <SubText>6:00 PM — 411 Main St, Chico</SubText>
-        </OverlayContent>
+        {loaded && (
+          <OverlayContent>
+            <LogoWrapper>
+              <StaticImage
+                src="../images/logo_circle.png"
+                alt="Orchard Church Logo"
+                placeholder="blurred"
+              />
+            </LogoWrapper>
+  
+            <HeroText>Sunday Morning Worship</HeroText>
+            <SubText>9:00 AM — 1054 Broadway St, Chico</SubText>
+  
+            <HeroText>Church On the Street</HeroText>
+            <SubText>6:00 PM — 411 Main St, Chico</SubText>
+          </OverlayContent>
+        )}
       </HeroWrapper>
     </Layout>
   );

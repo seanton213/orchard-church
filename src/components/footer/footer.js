@@ -40,7 +40,8 @@ const Footer = () => {
       <FooterContent>
         <SocialLinks>
           <a
-            href="https://www.facebook.com/profile.php?id=100064520416898"
+            //https://www.facebook.com/profile.php?id=100064520416898
+            href="https://www.facebook.com/groups/101547590674" 
             target="_blank"
             rel="noopener noreferrer"
           >
