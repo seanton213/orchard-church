@@ -1,8 +1,9 @@
 import * as React from "react";
 import Layout from "../components/layout";
 import Seo from "../components/seo";
-import styled from "styled-components";
 import { StaticImage } from "gatsby-plugin-image";
+import styled from "styled-components";
+import { useState } from "react";
 
 const HeroWrapper = styled.section`
   position: relative;
@@ -12,16 +13,27 @@ const HeroWrapper = styled.section`
 `;
 
 const BackgroundImage = styled.div`
-  background-image: url('../images/hands.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
-  width: 100%;
   z-index: -1;
+  overflow: hidden;
+
+  .gatsby-image-wrapper {
+    height: 100% !important;
+    width: 100% !important;
+  }
+
+  img {
+    object-fit: cover !important;
+    height: 100% !important;
+    width: 100% !important;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+  }
 `;
 
 const OverlayContent = styled.div`
@@ -55,31 +67,55 @@ const SubText = styled.p`
 `;
 
 const IndexPage = () => {
+  const [loaded, setLoaded] = useState(false);
   return (
     <Layout>
       <HeroWrapper>
-        <BackgroundImage />
+        <BackgroundImage>
+          <StaticImage
+            src="../images/hands.png"
+            alt="Sculpture of Hands"
+            layout="fullWidth"
+            placeholder="blurred"
+            objectFit="cover"
+            style={{ 
+              height: '100%',
+              width: '100%',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+            }}
+            onLoad={() => setLoaded(true)}
+          />
+        </BackgroundImage>
 
-        <OverlayContent>
-          <LogoWrapper>
-            <StaticImage
-              src="../images/logo_circle.png"
-              alt="Orchard Church Logo"
-              placeholder="blurred"
-            />
-          </LogoWrapper>
-
-          <HeroText>Sunday Morning Worship</HeroText>
-          <SubText>9:00 AM — 1054 Broadway St, Chico</SubText>
-
-          <HeroText>Church On the Street</HeroText>
-          <SubText>6:00 PM — 411 Main St, Chico</SubText>
-        </OverlayContent>
+        {loaded && (
+          <OverlayContent>
+            <LogoWrapper>
+              <StaticImage
+                src="../images/logo_circle.png"
+                alt="Orchard Church Logo"
+                placeholder="blurred"
+              />
+            </LogoWrapper>
+  
+            <HeroText>Sunday Morning Worship</HeroText>
+            <SubText>9:00 AM — 1054 Broadway St, Chico</SubText>
+  
+            <HeroText>Church On the Street</HeroText>
+            <SubText>6:00 PM — 411 Main St, Chico</SubText>
+          </OverlayContent>
+        )}
       </HeroWrapper>
     </Layout>
   );
 };
 
+/**
+ * Head export to define metadata for the page
+ *
+ * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
+ */
 export const Head = () => <Seo title="Home" />;
 
 export default IndexPage;
