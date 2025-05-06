@@ -77,14 +77,7 @@ const IndexPage = () => {
             alt="Sculpture of Hands"
             layout="fullWidth"
             placeholder="blurred"
-            objectFit="cover"
-            style={{ 
-              height: '100%',
-              width: '100%',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-            }}
+            style={{ height: "100%", width: "100%" }}
             onLoad={() => setLoaded(true)}
           />
         </BackgroundImage>
