@@ -18,12 +18,21 @@ const BackgroundImage = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+  z-index: -1;
+  overflow: hidden;
+
+  .gatsby-image-wrapper {
+    height: 100% !important;
+    width: 100% !important;
+  }
+
   img {
-    object-fit: cover;
-    height: 100%;
-    width: 100%;
-    position: absolute;
+    object-fit: cover !important;
+    height: 100% !important;
+    width: 100% !important;
+    position: absolute !important;
     top: 0;
+    left: 0;
   }
 `;
 
