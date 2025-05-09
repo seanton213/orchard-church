@@ -13,12 +13,12 @@ const GlobalWrapper = styled.div`
     left: 0 !important;
     width: 100% !important;
     height: 100% !important;
-    
+
     & > div {
       width: 100% !important;
       height: 100% !important;
     }
-    
+
     img {
       width: 100% !important;
       height: 100% !important;
@@ -30,11 +30,10 @@ const GlobalWrapper = styled.div`
 
 const HeroWrapper = styled.section`
   position: relative;
-  height: calc(100vh - 120px); /* Adjust this value based on your header/footer height */
+  height: 100vh;
   width: 100%;
   overflow: hidden;
   background-color: #000; /* Fallback color while image loads */
-  margin: 0 auto;
 `;
 
 const OverlayContent = styled.div`
@@ -48,9 +47,9 @@ const OverlayContent = styled.div`
   z-index: 10;
   width: 90%;
   max-width: 600px;
-  opacity: ${props => props.visible ? 1 : 0};
+  opacity: ${(props) => (props.visible ? 1 : 0)};
   transition: opacity 0.5s ease-in-out;
-  visibility: ${props => props.visible ? 'visible' : 'hidden'};
+  visibility: ${(props) => (props.visible ? "visible" : "hidden")};
 `;
 
 const LogoWrapper = styled.div`
@@ -59,7 +58,7 @@ const LogoWrapper = styled.div`
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
-  
+
   .logo-image {
     width: 100% !important;
   }
@@ -80,48 +79,60 @@ const SubText = styled.p`
 
 const IndexPage = () => {
   const [contentVisible, setContentVisible] = useState(false);
-  const [imagesLoaded, setImagesLoaded] = useState({ background: false, logo: false });
-  
+  const [imagesLoaded, setImagesLoaded] = useState({
+    background: false,
+    logo: false,
+  });
+
   // Track loaded state of both images
   const handleBackgroundLoaded = () => {
-    setImagesLoaded(prev => ({ ...prev, background: true }));
+    setImagesLoaded((prev) => ({ ...prev, background: true }));
   };
-  
+
   const handleLogoLoaded = () => {
-    setImagesLoaded(prev => ({ ...prev, logo: true }));
+    setImagesLoaded((prev) => ({ ...prev, logo: true }));
   };
-  
+
   // Only show content when both images are loaded and properly rendered
   useEffect(() => {
     let timer;
-    
+
     if (imagesLoaded.background && imagesLoaded.logo) {
       // Additional delay to ensure proper rendering
       timer = setTimeout(() => {
         setContentVisible(true);
       }, 300);
     }
-    
+
     return () => {
       if (timer) clearTimeout(timer);
     };
   }, [imagesLoaded]);
-  
+
   // Backup timer in case image load events don't fire properly
   useEffect(() => {
     const backupTimer = setTimeout(() => {
       setContentVisible(true);
     }, 1500);
-    
+
     return () => clearTimeout(backupTimer);
   }, []);
 
   return (
     <Layout>
-      <GlobalWrapper style={{ position: 'relative', zIndex: 1 }}>
+      <GlobalWrapper>
         <HeroWrapper>
           {/* Background Image */}
-          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}>
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              zIndex: 1,
+            }}
+          >
             <StaticImage
               src="../images/hands.png"
               alt="Sculpture of Hands"
@@ -131,11 +142,17 @@ const IndexPage = () => {
               className="hero-background"
               imgClassName="hero-background-img"
               onLoad={handleBackgroundLoaded}
-              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-              imgStyle={{ objectFit: 'cover', objectPosition: 'center' }}
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+              }}
+              imgStyle={{ objectFit: "cover", objectPosition: "center" }}
             />
           </div>
-          
+
           {/* Overlay Content */}
           <OverlayContent visible={contentVisible}>
             <LogoWrapper>
