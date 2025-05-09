@@ -5,14 +5,11 @@ import { StaticImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 
-// Hero section that respects the Layout component structure
+// Fix the height to be more specific - not full viewport height
 const HeroWrapper = styled.div`
   position: relative;
-  height: 100vh;
+  height: 80vh; /* Reduced from 100vh to avoid taking the entire page */
   width: 100%;
-  max-height: calc(
-    100vh - 0px
-  ); /* Adjust if header/footer have fixed heights */
   overflow: hidden;
   margin: 0;
   padding: 0;
@@ -28,10 +25,11 @@ const BackgroundContainer = styled.div`
   z-index: 1;
 `;
 
+// Pre-position overlay content to center immediately
 const OverlayContent = styled.div`
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 50%; /* Always centered */
   transform: translate(-50%, -50%);
   text-align: center;
   color: white;
@@ -39,15 +37,20 @@ const OverlayContent = styled.div`
   z-index: 2;
   width: 90%;
   max-width: 600px;
+  /* Hide content until loaded but keep it positioned correctly */
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
-  visibility: ${(props) => (props.isVisible ? "visible" : "hidden")};
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+  /* Position container before content is shown */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 const LogoWrapper = styled.div`
   margin-bottom: 1.5rem;
   width: 600px;
-  max-width: 100%;
+  max-width: 90%;
   margin-left: auto;
   margin-right: auto;
 `;
@@ -70,12 +73,12 @@ const SubText = styled.p`
 const IndexPage = () => {
   const [pageLoaded, setPageLoaded] = useState(false);
 
-  // Wait for component to mount and images to load
+  // Wait for component to mount completely
   useEffect(() => {
-    // Set a timer to ensure everything is loaded
+    // Set a timer to ensure everything is loaded and positioned
     const timer = setTimeout(() => {
       setPageLoaded(true);
-    }, 200);
+    }, 300); // Slightly longer delay to ensure proper positioning
 
     return () => clearTimeout(timer);
   }, []);
@@ -94,6 +97,8 @@ const IndexPage = () => {
               position: "absolute",
               top: 0,
               left: 0,
+              right: 0,
+              bottom: 0,
               width: "100%",
               height: "100%",
             }}
@@ -104,6 +109,7 @@ const IndexPage = () => {
           />
         </BackgroundContainer>
 
+        {/* Content is always positioned correctly, just hidden until loaded */}
         <OverlayContent isVisible={pageLoaded}>
           <LogoWrapper>
             <StaticImage
@@ -111,7 +117,7 @@ const IndexPage = () => {
               alt="Orchard Church Logo"
               placeholder="blurred"
               loading="eager"
-              width={700}
+              width={600}
             />
           </LogoWrapper>
 
