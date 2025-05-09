@@ -10,28 +10,15 @@ const HeroWrapper = styled.section`
   height: 100vh;
   width: 100%;
   overflow: hidden;
-  background-color: #000; /* Fallback color while image loads */
 `;
 
-const BackgroundImageWrapper = styled.div`
+const BackgroundImage = styled.div`
+  height: 100%;
+  width: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
   z-index: 1;
-
-  .gatsby-image-wrapper {
-    height: 100% !important;
-    width: 100% !important;
-  }
-
-  img {
-    object-fit: cover !important;
-    object-position: center !important;
-    height: 100% !important;
-    width: 100% !important;
-  }
 `;
 
 const OverlayContent = styled.div`
@@ -45,17 +32,16 @@ const OverlayContent = styled.div`
   z-index: 2;
   width: 90%;
   max-width: 600px;
-  opacity: ${props => props.visible ? 1 : 0};
-  transition: opacity 0.5s ease-in-out;
+  opacity: ${(props) => (props.loaded ? 1 : 0)};
+  transition: opacity 0.3s ease-in-out;
 `;
 
 const LogoWrapper = styled.div`
-  margin-bottom: 1.5rem;
-  
+  margin-bottom: 1rem;
+
   img {
     height: auto;
     max-width: 100%;
-    min-width: 280px;
   }
 `;
 
@@ -73,45 +59,38 @@ const SubText = styled.p`
 `;
 
 const IndexPage = () => {
-  const [contentVisible, setContentVisible] = useState(false);
-  
+  const [loaded, setLoaded] = useState(false);
+
+  // Add effect to ensure overlay displays correctly after everything loads
   useEffect(() => {
-    // Delay showing the content to ensure background image has time to properly load and render
     const timer = setTimeout(() => {
-      setContentVisible(true);
-    }, 300);
-    
+      setLoaded(true);
+    }, 100);
+
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <Layout>
       <HeroWrapper>
-        <BackgroundImageWrapper>
+        <BackgroundImage>
           <StaticImage
             src="../images/hands.png"
             alt="Sculpture of Hands"
             layout="fullWidth"
             placeholder="blurred"
-            loading="eager" /* Force high priority loading */
-            objectFit="cover"
-            objectPosition="center"
-            style={{ 
-              position: "absolute",
-              height: "100%", 
-              width: "100%"
-            }}
+            style={{ height: "100%", width: "100%", objectFit: "cover" }}
+            onLoad={() => setLoaded(true)}
           />
-        </BackgroundImageWrapper>
-        
-        <OverlayContent visible={contentVisible}>
+        </BackgroundImage>
+
+        <OverlayContent loaded={loaded}>
           <LogoWrapper>
             <StaticImage
               src="../images/logo_circle.png"
               alt="Orchard Church Logo"
               placeholder="blurred"
               width={2000}
-              loading="eager" /* Force high priority loading */
             />
           </LogoWrapper>
 
