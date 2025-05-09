@@ -37,5 +37,7 @@ module.exports = {
             icon: `src/images/logo_circle_.png`, // This path is relative to the root of the site.
         },
     },
+    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-fix-fouc`,
   ],
 };
