@@ -3,7 +3,7 @@ import Layout from "../components/layout";
 import Seo from "../components/seo";
 import { StaticImage } from "gatsby-plugin-image";
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const HeroWrapper = styled.section`
   position: relative;
@@ -18,13 +18,7 @@ const BackgroundImage = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  img {
-    object-fit: cover;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-  }
+  z-index: 1;
 `;
 
 const OverlayContent = styled.div`
@@ -35,9 +29,16 @@ const OverlayContent = styled.div`
   text-align: center;
   color: white;
   padding: 1rem;
+  z-index: 2;
+  width: 90%;
+  max-width: 600px;
+  opacity: ${props => props.loaded ? 1 : 0};
+  transition: opacity 0.3s ease-in-out;
 `;
 
 const LogoWrapper = styled.div`
+  margin-bottom: 1rem;
+  
   img {
     height: auto;
     max-width: 100%;
@@ -59,6 +60,16 @@ const SubText = styled.p`
 
 const IndexPage = () => {
   const [loaded, setLoaded] = useState(false);
+  
+  // Add effect to ensure overlay displays correctly after everything loads
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoaded(true);
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <Layout>
       <HeroWrapper>
@@ -68,28 +79,27 @@ const IndexPage = () => {
             alt="Sculpture of Hands"
             layout="fullWidth"
             placeholder="blurred"
-            style={{ height: "100%", width: "100%" }}
+            style={{ height: "100%", width: "100%", objectFit: "cover" }}
             onLoad={() => setLoaded(true)}
           />
         </BackgroundImage>
+        
+        <OverlayContent loaded={loaded}>
+          <LogoWrapper>
+            <StaticImage
+              src="../images/logo_circle.png"
+              alt="Orchard Church Logo"
+              placeholder="blurred"
+              width={200}
+            />
+          </LogoWrapper>
 
-        {loaded && (
-          <OverlayContent>
-            <LogoWrapper>
-              <StaticImage
-                src="../images/logo_circle.png"
-                alt="Orchard Church Logo"
-                placeholder="blurred"
-              />
-            </LogoWrapper>
-  
-            <HeroText>Sunday Morning Worship</HeroText>
-            <SubText>9:00 AM — 1054 Broadway St, Chico</SubText>
-  
-            <HeroText>Church On the Street</HeroText>
-            <SubText>6:00 PM — 411 Main St, Chico</SubText>
-          </OverlayContent>
-        )}
+          <HeroText>Sunday Morning Worship</HeroText>
+          <SubText>9:00 AM — 1054 Broadway St, Chico</SubText>
+
+          <HeroText>Church On the Street</HeroText>
+          <SubText>6:00 PM — 411 Main St, Chico</SubText>
+        </OverlayContent>
       </HeroWrapper>
     </Layout>
   );
