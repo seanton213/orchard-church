@@ -32,13 +32,13 @@ const OverlayContent = styled.div`
   z-index: 2;
   width: 90%;
   max-width: 600px;
-  opacity: ${(props) => (props.loaded ? 1 : 0)};
+  opacity: ${props => props.loaded ? 1 : 0};
   transition: opacity 0.3s ease-in-out;
 `;
 
 const LogoWrapper = styled.div`
   margin-bottom: 1rem;
-
+  
   img {
     height: auto;
     max-width: 100%;
@@ -60,13 +60,13 @@ const SubText = styled.p`
 
 const IndexPage = () => {
   const [loaded, setLoaded] = useState(false);
-
+  
   // Add effect to ensure overlay displays correctly after everything loads
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoaded(true);
     }, 100);
-
+    
     return () => clearTimeout(timer);
   }, []);
 
@@ -83,14 +83,14 @@ const IndexPage = () => {
             onLoad={() => setLoaded(true)}
           />
         </BackgroundImage>
-
+        
         <OverlayContent loaded={loaded}>
           <LogoWrapper>
             <StaticImage
               src="../images/logo_circle.png"
               alt="Orchard Church Logo"
               placeholder="blurred"
-              width={2000}
+              width={200}
             />
           </LogoWrapper>
 
