@@ -5,33 +5,27 @@ import { StaticImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 
-const HeroWrapper = styled.section`
+// Hero section that respects the Layout component structure
+const HeroWrapper = styled.div`
   position: relative;
   height: 100vh;
   width: 100%;
+  max-height: calc(
+    100vh - 0px
+  ); /* Adjust if header/footer have fixed heights */
   overflow: hidden;
+  margin: 0;
+  padding: 0;
   background-color: #000; /* Fallback color while image loads */
 `;
 
-const BackgroundImageWrapper = styled.div`
+const BackgroundContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   z-index: 1;
-
-  .gatsby-image-wrapper {
-    height: 100% !important;
-    width: 100% !important;
-  }
-
-  img {
-    object-fit: cover !important;
-    object-position: center !important;
-    height: 100% !important;
-    width: 100% !important;
-  }
 `;
 
 const OverlayContent = styled.div`
@@ -45,18 +39,17 @@ const OverlayContent = styled.div`
   z-index: 2;
   width: 90%;
   max-width: 600px;
-  opacity: ${props => props.visible ? 1 : 0};
-  transition: opacity 0.5s ease-in-out;
+  opacity: ${(props) => (props.isVisible ? 1 : 0)};
+  visibility: ${(props) => (props.isVisible ? "visible" : "hidden")};
+  transition: opacity 0.3s ease-in-out;
 `;
 
 const LogoWrapper = styled.div`
   margin-bottom: 1.5rem;
-  
-  img {
-    height: auto;
-    max-width: 100%;
-    min-width: 280px;
-  }
+  width: 600px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const HeroText = styled.h1`
@@ -64,54 +57,61 @@ const HeroText = styled.h1`
   margin-bottom: 0.5rem;
   font-weight: bold;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+  color: white; /* Force white text regardless of theme */
 `;
 
 const SubText = styled.p`
   font-size: 1.25rem;
   margin-bottom: 1.5rem;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+  color: white; /* Force white text regardless of theme */
 `;
 
 const IndexPage = () => {
-  const [contentVisible, setContentVisible] = useState(false);
-  
+  const [pageLoaded, setPageLoaded] = useState(false);
+
+  // Wait for component to mount and images to load
   useEffect(() => {
-    // Delay showing the content to ensure background image has time to properly load and render
+    // Set a timer to ensure everything is loaded
     const timer = setTimeout(() => {
-      setContentVisible(true);
-    }, 300);
-    
+      setPageLoaded(true);
+    }, 200);
+
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <Layout>
       <HeroWrapper>
-        <BackgroundImageWrapper>
+        <BackgroundContainer>
           <StaticImage
             src="../images/hands.png"
             alt="Sculpture of Hands"
             layout="fullWidth"
             placeholder="blurred"
-            loading="eager" /* Force high priority loading */
-            objectFit="cover"
-            objectPosition="center"
-            style={{ 
+            loading="eager"
+            style={{
               position: "absolute",
-              height: "100%", 
-              width: "100%"
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+            }}
+            imgStyle={{
+              objectFit: "cover",
+              objectPosition: "center",
             }}
           />
-        </BackgroundImageWrapper>
-        
-        <OverlayContent visible={contentVisible}>
+        </BackgroundContainer>
+
+        <OverlayContent isVisible={pageLoaded}>
           <LogoWrapper>
             <StaticImage
               src="../images/logo_circle.png"
               alt="Orchard Church Logo"
               placeholder="blurred"
-              width={2000}
-              loading="eager" /* Force high priority loading */
+              loading="eager"
+              width={700}
             />
           </LogoWrapper>
 
