@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import Header from "./header/header"
+import Header from "./header"
 import Footer from "./footer/footer"
 import "./layout.css"
 
