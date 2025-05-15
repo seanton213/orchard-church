@@ -24,28 +24,30 @@ const Container = styled.div`
   box-sizing: border-box;
 
   @media (max-width: 1024px) {
-    padding: 0 1rem;
+    padding: 1rem;
   }
 `;
 
 const Hamburger = styled.button`
   display: none;
   flex-direction: column;
-  justify-content: space-between;
-  width: 24px;
-  height: 18px;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
-  margin: 0;
+  margin-left: auto;
   z-index: 999;
 
   span {
     display: block;
+    width: 100%;
     height: 3px;
     background-color: var(--color-brown);
     border-radius: 2px;
+    transition: all 0.3s ease;
   }
 
   @media (max-width: 1024px) {
@@ -59,12 +61,13 @@ const NavWrapper = styled.nav`
   @media (max-width: 1024px) {
     position: absolute;
     top: 100%;
-    right: 0;
+    left: 0;
     background-color: var(--color-beige);
     width: 100%;
-    display: ${({ open }) => (open ? "block" : "none")};
+    display: ${({ $open }) => ($open ? "block" : "none")};
     padding: 1rem 2rem;
     z-index: 998;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 `;
 
@@ -79,6 +82,7 @@ const Nav = styled.ul`
   @media (max-width: 1024px) {
     flex-direction: column;
     gap: 1rem;
+    align-items: flex-start;
   }
 `;
 
@@ -87,6 +91,11 @@ const NavItem = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    align-items: flex-start;
+  }
 
   &:hover ul {
     display: block;
@@ -109,6 +118,11 @@ const NavLink = styled(Link)`
     font-weight: 700;
     border-bottom: 2px solid var(--color-red);
   }
+  
+  @media (max-width: 1024px) {
+    width: 100%;
+    padding: 0.5rem 0;
+  }
 `;
 
 const DropdownMenu = styled.ul`
@@ -128,8 +142,8 @@ const DropdownMenu = styled.ul`
     transform: none;
     box-shadow: none;
     padding: 0;
-    margin-left: 1rem;
-    display: block;
+    margin: 0.5rem 0 0.5rem 1rem;
+    width: 100%;
   }
 
   a {
@@ -141,6 +155,10 @@ const DropdownMenu = styled.ul`
     &:hover {
       background-color: var(--color-orange);
       color: var(--color-white);
+    }
+    
+    @media (max-width: 1024px) {
+      padding: 0.5rem 0;
     }
   }
 `;
@@ -163,7 +181,7 @@ const LogoWrapper = styled.div`
 const Header = ({ siteTitle }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const toggleMenu = () => setMenuOpen((prev) => !prev);
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
     <HeaderWrapper>
@@ -195,7 +213,7 @@ const Header = ({ siteTitle }) => {
           <span />
         </Hamburger>
 
-        <NavWrapper open={menuOpen}>
+        <NavWrapper $open={menuOpen}>
           <Nav>
             <NavItem>
               <NavLink to="/" activeClassName="active">
