@@ -5,11 +5,14 @@ import styled from "styled-components";
 import { StaticImage } from "gatsby-plugin-image";
 
 const HeroSection = styled.section`
+  max-width: 900px;
+  margin: 0 auto;
   text-align: center;
   padding: 4rem 2rem 2rem;
   h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
+    border-bottom: 2px solid var(--color-orange);
   }
   p {
     font-size: 1.25rem;
@@ -22,7 +25,7 @@ const MinistryGrid = styled.div`
   gap: 2rem;
   padding: 2rem;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
 `;
 
@@ -51,59 +54,70 @@ const MinistryCard = styled.div`
 
 const Ministry = () => {
   return (
-      <Layout>
-        <HeroSection>
-          <h1>Our Ministries</h1>
-          <p>Find a place to connect, grow, and serve.</p>
-        </HeroSection>
-  
-        <MinistryGrid>
-          <MinistryCard>
-            <StaticImage
-              src="../images/youth-ministry.jpg"
-              alt="Youth Ministry"
-              placeholder="blurred"
-              style={{ borderRadius: "1rem" }}
-            />
-            <h2>Youth Ministry</h2>
-            <p>Helping students grow in their faith and community.</p>
-          </MinistryCard>
-  
-          <MinistryCard>
-            <StaticImage
-              src="../images/women-ministry.jpg"
-              alt="Women's Ministry"
-              placeholder="blurred"
-              style={{ borderRadius: "1rem" }}
-            />
-            <h2>Women's Ministry</h2>
-            <p>Empowering women to deepen their relationship with Christ.</p>
-          </MinistryCard>
-  
-          <MinistryCard>
-            <StaticImage
-              src="../images/men-ministry.jpg"
-              alt="Men's Ministry"
-              placeholder="blurred"
-              style={{ borderRadius: "1rem" }}
-            />
-            <h2>Men's Ministry</h2>
-            <p>Equipping men to lead and serve with integrity.</p>
-          </MinistryCard>
-  
-          <MinistryCard>
-            <StaticImage
-              src="../images/worship-ministry.jpg"
-              alt="Worship Ministry"
-              placeholder="blurred"
-              style={{ borderRadius: "1rem" }}
-            />
-            <h2>Worship Ministry</h2>
-            <p>Leading our church family into authentic worship.</p>
-          </MinistryCard>
-        </MinistryGrid>
-      </Layout>
-    );
+    <Layout>
+      <HeroSection>
+        <h1>Our Ministries</h1>
+        <p>Find a place to connect, grow, and serve.</p>
+      </HeroSection>
+
+      <MinistryGrid>
+        <MinistryCard>
+          <StaticImage
+            src="../images/youth-ministry.jpg"
+            alt="Orchard Grove"
+            placeholder="blurred"
+            style={{ borderRadius: "1rem" }}
+          />
+          <h2>Orchard Grove</h2>
+          <p>Helping kids</p>
+        </MinistryCard>
+
+        <MinistryCard>
+          <StaticImage
+            src="../images/women-ministry.jpg"
+            alt="Church on the Street"
+            placeholder="blurred"
+            style={{ borderRadius: "1rem" }}
+          />
+          <h2>Church on the Street</h2>
+          <p>Serving Our Community</p>
+        </MinistryCard>
+
+        <MinistryCard>
+          <StaticImage
+            src="../images/men-ministry.jpg"
+            alt="Orchard House"
+            placeholder="blurred"
+            style={{ borderRadius: "1rem" }}
+          />
+          <h2>Orchard House</h2>
+          <p>Equipping men to lead and serve with integrity.</p>
+        </MinistryCard>
+
+        <MinistryCard>
+          <StaticImage
+            src="../images/worship-ministry.jpg"
+            alt="Wednesday Night Bible Study"
+            placeholder="blurred"
+            style={{ borderRadius: "1rem" }}
+          />
+          <h2>Wednesday Night Bible Study</h2>
+          <p>Leading our church family into authentic worship</p>
+        </MinistryCard>
+
+        <MinistryCard>
+          <StaticImage
+            src="../images/worship-ministry.jpg"
+            alt="Christmas Wish"
+            placeholder="blurred"
+            style={{ borderRadius: "1rem" }}
+          />
+          <h2>Christmas Wish</h2>
+          <p>Christmas</p>
+        </MinistryCard>
+      </MinistryGrid>
+    </Layout>
+  );
 };
 
 export const Head = () => <Seo title="Ministry" />;

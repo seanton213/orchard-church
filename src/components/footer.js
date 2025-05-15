@@ -1,37 +1,52 @@
 import * as React from "react";
-import "./footer.css";
 import { FaFacebook } from "react-icons/fa";
 import styled from "styled-components";
 
 const FooterWrapper = styled.footer`
-  padding: 2rem 0;
-  text-align: center;
+  background-color: var(--color-beige);
+  padding: var(--space-5) var(--size-gutter);
+  border-top: 1px solid var(--color-gray);
+  margin-top: var(--space-5);
 `;
 
 const FooterContent = styled.div`
-  max-width: 1200px;
+  max-width: var(--size-content);
   margin: 0 auto;
-  padding: 1rem;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+  padding: 10px;
 `;
 
 const SocialLinks = styled.div`
   a {
     margin: 0 1rem;
     text-decoration: none;
-    color: #333;
+    color: var(--color-brown);
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--color-red);
+    }
   }
 `;
 
 const ContactInfo = styled.div`
-  margin-top: 1rem;
+  margin-top: var(--space-3);
+
   p {
     margin: 0.5rem 0;
-    color: #333;
+    color: var(--color-brown);
+    font-size: var(--font-sm);
   }
+`;
+
+const Copyright = styled.p`
+  color: var(--color-brown);
+  margin-top: var(--space-3);
+  font-size: var(--font-sm);
 `;
 
 const Footer = () => {
@@ -40,8 +55,7 @@ const Footer = () => {
       <FooterContent>
         <SocialLinks>
           <a
-            //https://www.facebook.com/profile.php?id=100064520416898
-            href="https://www.facebook.com/groups/101547590674" 
+            href="https://www.facebook.com/groups/101547590674"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -52,7 +66,9 @@ const Footer = () => {
           <p>Email: info@orchardchurch.com</p>
           <p>Address: 1054 Broadway St, Chico, CA</p>
         </ContactInfo>
-        <p>© {new Date().getFullYear()} &middot; Orchard Church</p>
+        <Copyright>
+          © {new Date().getFullYear()} &middot; Orchard Church
+        </Copyright>
       </FooterContent>
     </FooterWrapper>
   );

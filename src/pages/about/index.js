@@ -5,25 +5,59 @@ import styled from "styled-components";
 import { Link } from "gatsby";
 
 const PageWrapper = styled.div`
-  padding: 3rem;
+  padding: 3rem 1.5rem;
   text-align: center;
 `;
 
 const Section = styled.section`
   max-width: 900px;
   margin: 0 auto;
+  text-align: center;
+
+  h1 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--color-brown);
+    margin-bottom: 1.5rem;
+    position: relative;
+    border-bottom: 2px solid var(--color-orange);
+    text-align: center;
+  }
+
+  p {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--color-darkbrown, #3e3e3e);
+    margin: 1.5rem 0 2rem;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
 `;
 
 const Links = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
   margin-top: 2rem;
+
   a {
-    display: block;
-    margin: 1rem 0;
-    color: #007bff;
-    font-size: 1.2rem;
+    color: var(--color-orange, #e67e22);
+    font-size: 1.125rem;
+    font-weight: 600;
     text-decoration: none;
+    transition: color 0.2s ease;
 
     &:hover {
+      color: var(--color-darkbrown, #3e3e3e);
       text-decoration: underline;
     }
   }

@@ -12,24 +12,20 @@ const HeaderWrapper = styled.header`
 
 const Container = styled.div`
   margin: 0 auto;
-  padding: var(--space-4) var(--size-gutter);
+  padding: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   max-width: 1200px;
   width: 100%;
-  height: 150px;
-  max-height: 240px;
-  overflow: visible;
+  height: auto;
   position: relative;
-  z-index: 1;
-`;
+  overflow: visible;
+  box-sizing: border-box;
 
-const SiteTitle = styled.span`
-  color: var(--color-brown);
-  font-family: var(--font-heading);
-  font-weight: bold;
-  font-size: 1.25rem;
+  @media (max-width: 1024px) {
+    padding: 0 1rem;
+  }
 `;
 
 const Hamburger = styled.button`
@@ -42,7 +38,7 @@ const Hamburger = styled.button`
   border: none;
   cursor: pointer;
   padding: 0;
-  padding-right: 1rem;
+  margin: 0;
   z-index: 999;
 
   span {
@@ -68,7 +64,7 @@ const NavWrapper = styled.nav`
     width: 100%;
     display: ${({ open }) => (open ? "block" : "none")};
     padding: 1rem 2rem;
-    z-index: 999;
+    z-index: 998;
   }
 `;
 
@@ -88,6 +84,9 @@ const Nav = styled.ul`
 
 const NavItem = styled.li`
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   &:hover ul {
     display: block;
@@ -116,7 +115,8 @@ const DropdownMenu = styled.ul`
   display: none;
   position: absolute;
   top: 100%;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: var(--color-beige);
   padding: var(--space-2);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -125,6 +125,7 @@ const DropdownMenu = styled.ul`
 
   @media (max-width: 1024px) {
     position: static;
+    transform: none;
     box-shadow: none;
     padding: 0;
     margin-left: 1rem;
@@ -144,6 +145,21 @@ const DropdownMenu = styled.ul`
   }
 `;
 
+const LogoWrapper = styled.div`
+  max-width: 300px;
+  width: 100%;
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 160px;
+  }
+`;
+
 const Header = ({ siteTitle }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -156,15 +172,21 @@ const Header = ({ siteTitle }) => {
           to="/"
           style={{ display: "flex", alignItems: "center", gap: "1rem" }}
         >
-          <StaticImage
-            src="../images/logo_color.png"
-            alt="Church"
-            placeholder="none"
-            layout="fixed"
-            width={300}
-            style={{ objectFit: "contain", maxHeight: "300px" }}
-          />
-          <SiteTitle>{siteTitle}</SiteTitle>
+          <LogoWrapper>
+            <StaticImage
+              src="../images/logo_color.png"
+              alt="Church"
+              placeholder="none"
+              layout="constrained"
+              width={300}
+              style={{
+                objectFit: "contain",
+                maxHeight: "300px",
+                maxWidth: "100%",
+                height: "auto",
+              }}
+            />
+          </LogoWrapper>
         </Link>
 
         <Hamburger onClick={toggleMenu} aria-label="Toggle Menu">
@@ -205,6 +227,16 @@ const Header = ({ siteTitle }) => {
             <NavItem>
               <NavLink to="/ministry" activeClassName="active">
                 Our Ministries
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/visit" activeClassName="active">
+                Visit
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/contact" activeClassName="active">
+                Contact
               </NavLink>
             </NavItem>
             <NavItem>
