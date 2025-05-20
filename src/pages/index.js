@@ -6,46 +6,50 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 
 const HeroWrapper = styled.section`
-  position: relative;
-  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* allow it to grow naturally if needed */
   width: 100%;
+  position: relative;
   overflow: hidden;
 `;
 
 const BackgroundImage = styled.div`
-  height: 100%;
-  width: 100%;
   position: absolute;
   top: 0;
   left: 0;
+  height: 100%;
+  width: 100%;
   z-index: 1;
 `;
 
 const OverlayContent = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 800px;
+  padding: 2rem;
   text-align: center;
   color: white;
-  padding: 1rem;
-  z-index: 2;
-  width: 90%;
-  max-width: 800px;
   opacity: ${props => props.loaded ? 1 : 0};
   transition: opacity 0.3s ease-in-out;
-  display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  justify-content: center; /
-  height: 100%; 
+  width: 100%;
+
+  @media (max-height: 700px) {
+    justify-content: flex-start;
+    margin-top: 2rem;
+  }
 `;
 
 const LogoWrapper = styled.div`
   margin-bottom: 1rem;
   display: flex;
   justify-content: center;
-  
+
   .gatsby-image-wrapper {
     max-width: 800px;
     width: 100%;
