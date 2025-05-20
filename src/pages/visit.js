@@ -72,6 +72,8 @@ const Visit = () => {
           <p>
             <Link to="/ministry">Learn more about Orchard Grove →</Link>
           </p>
+          
+          <hr></hr>
 
           <h2>Sunday Evenings: Church On The Street (COTS)</h2>
           <p>
@@ -89,7 +91,25 @@ const Visit = () => {
           <p>
             <Link to="/ministry">Learn more about COTS →</Link>
           </p>
-
+          
+          <hr></hr>
+          
+          <h2>Watch on YouTube</h2>
+          <p>
+            You can find sermons, worship, and updates on our official YouTube channel.
+          </p>
+          <p>
+            <a
+              href="https://www.youtube.com/@orchardchurchofchicoca8076/featured"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Visit Orchard Church on YouTube →
+            </a>
+          </p>
+          
+          <hr></hr>
+          
           <h2>Men’s Bible Study</h2>
           <p>
             <strong>When:</strong> Every Monday (unless posted) at 6:00 PM
@@ -100,6 +120,8 @@ const Visit = () => {
             We read through a book of the Bible and discuss how to live
             faithfully as men who follow Jesus with humility and strength.
           </p>
+          
+          <hr></hr>
 
           <h2>Wednesday Bible Study</h2>
           <p>

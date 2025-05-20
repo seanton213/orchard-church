@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FaFacebook } from "react-icons/fa";
+import { FaFacebook, FaYoutube } from "react-icons/fa";
 import styled from "styled-components";
 
 const FooterWrapper = styled.footer`
@@ -60,6 +60,14 @@ const Footer = () => {
             rel="noopener noreferrer"
           >
             <FaFacebook size={30} />
+          </a>
+          
+          <a
+            href="https://www.youtube.com/@orchardchurchofchicoca8076/featured"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaYoutube size={30} />
           </a>
         </SocialLinks>
         <ContactInfo>
