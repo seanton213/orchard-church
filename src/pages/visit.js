@@ -120,6 +120,9 @@ const Visit = () => {
             We read through a book of the Bible and discuss how to live
             faithfully as men who follow Jesus with humility and strength.
           </p>
+          <p>
+            <Link to="/ministry">Learn more about Men's Bible Study →</Link>
+          </p>
           
           <hr></hr>
 
